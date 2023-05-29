@@ -12,7 +12,7 @@
     </body>
 </html>
 <script>
-    var palabraInicial = "jsakdjsk a";
+    var palabraInicial = "0213";
     var palabraFinal = "";
     /*Reglas
     La letra "e" es convertida para "enter"
@@ -62,7 +62,6 @@
                     temp = "ufat";
                     break;
                 case undefined:
-                    return ".error";
                 case null:
                     return ".error";
                 }
@@ -73,11 +72,12 @@
     
     function ComprobarPalabra(palabraInicial){
         if(isNaN(palabraInicial)){
-            return palabraInicial.toString().toLowerCase();
+            if(palabraInicial!==null && palabraInicial!==undefined && palabraInicial!==""){
+                return palabraInicial.toString().toLowerCase();
+            }
         }
-        document.writeln("Trata de ingresar una palabra");
+        document.write("Trata de ingresar una palabra válida<br>");
         return false;
-        
     }
     //#endregion Encriptar
     
