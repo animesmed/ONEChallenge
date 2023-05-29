@@ -12,7 +12,7 @@
     </body>
 </html>
 <script>
-    var palabraInicial = "a e i o u";
+    var palabraInicial = "hoberlai coberdentergai, tenter sailufatdai tufat timesober loberbenterznober";
     var palabraFinal = "";
     /*Reglas
     La letra "e" es convertida para "enter"
@@ -21,15 +21,15 @@
     La letra "o" es convertida para "ober"
     La letra "u" es convertida para "ufat"
     */
-    
-    Transformar(Encriptar);
+    Transformar(Desencriptar);
 
     function Transformar(funcion){
         if(ComprobarPalabra(palabraInicial)){
+            document.write("Palabra inicial -> "+palabraInicial + "<br>");
             palabraFinal=funcion(palabraInicial);
-            document.writeln("Palabra final -> "+palabraFinal);
+            document.write("Palabra final -> "+palabraFinal);
         }else{
-            document.writeln("Error!: Palabra no admitida");
+            document.write("Error!: Palabra no admitida");
         }
     }
     //#region Encriptar
@@ -74,7 +74,7 @@
     function ComprobarPalabra(palabraInicial){
         if(isNaN(palabraInicial)){
             if(palabraInicial!==null && palabraInicial!==undefined && palabraInicial!==""){
-                return palabraInicial.toString().toLowerCase();
+                return palabraInicial.toString().toLowerCase().split();
             }
         }
         document.write("Trata de ingresar una palabra válida<br>");
@@ -82,6 +82,87 @@
     }
     //#endregion Encriptar
     //#region Desencriptar
-    
+    function Desencriptar(palabraInicial){
+        var palabraE = palabraInicial;
+        for (let i = 0; i < palabraInicial.length; i++) {
+            var a = Buscar(palabraE);
+            console.log("Mensaje-> "+a);
+            if(a!==undefined){
+                palabraE = a;
+            }else{
+                break;
+            }
+        }
+        return palabraE;
+    }
+    //Busca la secuencia de las palabras
+    function Buscar(palabra){
+        let i=0;
+        let letra;
+        for (let i = 0; i < palabra.length; i++) {
+            console.log("empieza bucle");
+            temp = palabra[i];
+            switch (temp) {
+                case 'e':
+                    if(palabra[i+1] == 'n' &&
+                       palabra[i+2] == 't' &&
+                       palabra[i+3] == 'e' &&
+                       palabra[i+4] == 'r'){
+                        console.log("caso e");
+                        return RecortarPalabra(palabra,i,'e'); //La palabra dada la recortar
+                    }
+                    break;
+                case 'i':
+                    if(palabra[i+1] == 'm' &&
+                       palabra[i+2] == 'e' &&
+                       palabra[i+3] == 's'){
+                        console.log("caso i");
+                        return RecortarPalabra(palabra,i,'i');
+                       }
+                    break;
+                case 'a':
+                    if(palabra[i+1] == 'i'){
+                        console.log("caso a");
+                        return RecortarPalabra(palabra,i,'a');
+                    }
+                    break;
+                case 'o':
+                    if(palabra[i+1] == 'b' &&
+                       palabra[i+2] == 'e' &&
+                       palabra[i+3] == 'r'){
+                        console.log("caso o");
+                        return RecortarPalabra(palabra,i,'o');
+                       }
+                    break;
+                case 'u':
+                    if(palabra[i+1] == 'f' &&
+                       palabra[i+2] == 'a' &&
+                       palabra[i+3] == 't'){
+                        console.log("caso u");
+                        return RecortarPalabra(palabra,i,'u');
+                       }
+                    break;
+            }
+        }
+    }
+
+    function RecortarPalabra(palabraInicial,indice,letra){
+        let n=0;
+        switch (letra) {
+            case 'e':
+                n=4;
+                break;
+            case 'a':
+                n=1;
+                break;
+            case 'i':
+            case 'o':
+            case 'u':
+                n=3;
+                break;
+        }
+        return palabraInicial.slice(0,indice) + letra + 
+               palabraInicial.slice(indice+n+1,palabraInicial.length);
+    }
     //#endregion Desencriptar
 </script>
