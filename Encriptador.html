@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Contacto - Barbería Alura</title>
+        <title>Encriptador - ONE Challenge</title>
         <!--Reseteamos las configuraciones predeterminadas del navegador-->
         <link rel="stylesheet" href="C:/Users/YONI/Desktop/ProgCourse/DesarrolloWeb/1742-HTML5-y-CSS3-parte2-master/reset.css">
 
@@ -12,5 +12,73 @@
     </body>
 </html>
 <script>
+    var palabraInicial = "jsakdjsk a";
+    var palabraFinal = "";
+    /*Reglas
+    La letra "e" es convertida para "enter"
+    La letra "i" es convertida para "imes"
+    La letra "a" es convertida para "ai"
+    La letra "o" es convertida para "ober"
+    La letra "u" es convertida para "ufat"
+    */
+    
+    Encriptar();
+    //#region Encriptar
+    function Encriptar(){
+        if(ComprobarPalabra(palabraInicial)){
+            palabraFinal=EncriptarPalabra(palabraInicial);
+            document.writeln("Palabra final -> "+palabraFinal);
+        }else{
+            document.writeln("Error!: Palabra no admitida");
+        }
+    }
+    function EncriptarPalabra(palabraInicial){
+        for (let i = 0; i < palabraInicial.length; i++) {
+            var temp = palabraInicial[i];
+            switch (temp) {
+                case 'É':
+                case 'é':
+                case 'e':
+                    temp = "enter";
+                    break;
+                case 'Í':
+                case 'í':
+                case 'i':
+                    temp = "imes";
+                    break;
+                case 'Á':
+                case 'á':
+                case 'a':
+                    temp = "ai";
+                    break;
+                case 'Ó':
+                case 'ó':
+                case 'o':
+                    temp = "ober";
+                    break;
+                case 'Ú':
+                case 'ú':
+                case 'u':
+                    temp = "ufat";
+                    break;
+                case undefined:
+                    return ".error";
+                case null:
+                    return ".error";
+                }
+            palabraFinal += temp;
+        }
+        return palabraFinal;
+    }
+    
+    function ComprobarPalabra(palabraInicial){
+        if(isNaN(palabraInicial)){
+            return palabraInicial.toString().toLowerCase();
+        }
+        document.writeln("Trata de ingresar una palabra");
+        return false;
+        
+    }
+    //#endregion Encriptar
     
 </script>
