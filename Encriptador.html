@@ -1,19 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Encriptador - ONE Challenge</title>
-        <!--Reseteamos las configuraciones predeterminadas del navegador-->
-        <link rel="stylesheet" href="C:/Users/YONI/Desktop/ProgCourse/DesarrolloWeb/1742-HTML5-y-CSS3-parte2-master/reset.css">
 
-        <link rel="stylesheet" href="C:/Users/YONI/Desktop/ONEChallenge/style.css">
-    </head>
-    <body>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Encriptador - ONE Challenge</title>
+    <!--Reseteamos las configuraciones predeterminadas del navegador-->
+    <link rel="stylesheet"
+        href="C:/Users/YONI/Desktop/ProgCourse/DesarrolloWeb/1742-HTML5-y-CSS3-parte2-master/reset.css">
+    <link rel="stylesheet" href="C:/Users/YONI/Desktop/ONEChallenge/style.css">
+</head>
+
+<body>
+    <header>
+        <!--Imagen-->
+        <h1><img src="Recursos/Logo.png" class="logo"></h1>
+        <!--Titulo-->
+        <h2>¡Encripta tu mensaje!</h2>
+    </header>
+    <main>
+        <!--Instrucciones-->
+        <div class="Input">
+            <p>&#128712; Solo letras minúsculas y sin acentos</p>
+            <!--Lugar para escribir-->
+            <input type="text" id="textoATransformar" class="input" required placeholder="Ingresa el texto aquí">
+            <div class="botones">
+                <!--Botones-->
+                <input type="submit" value="Encripta" class="enviar" onclick="Transformar(Encriptar)">
+                <p class="espacio"></p>
+                <input type="submit" value="Desencripta" class="enviar" onclick="Transformar(Desencriptar)">
+            </div>
+            <!--Lugar donde aparecerá el mensaje-->
+            <div class="resultado">
+                <output name="resultado" id="resultado">¡Acá aparecerá el mensaje!</output>
+            </div>
+            <!--Boton para copiar-->
+            <div class="copiar">
+                <input type="submit" value="Copiar" onclick="CopiarTexto()">
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <!--Acerca de-->
+        <p>Acerca de:<br><br>Proyecto realizado por Annie M. Estacio Medrano para el ONE Challenge</p>
+    </footer>
+</body>
+
 </html>
 <script>
-    var palabraInicial = "hoberlai coberdentergai, tenter sailufatdai tufat timesober loberbenterznober";
-    var palabraFinal = "";
+    //var pantalla = document.querySelector("html");
     /*Reglas
     La letra "e" es convertida para "enter"
     La letra "i" es convertida para "imes"
@@ -21,19 +56,29 @@
     La letra "o" es convertida para "ober"
     La letra "u" es convertida para "ufat"
     */
-    Transformar(Desencriptar);
-
-    function Transformar(funcion){
-        if(ComprobarPalabra(palabraInicial)){
-            document.write("Palabra inicial -> "+palabraInicial + "<br>");
-            palabraFinal=funcion(palabraInicial);
-            document.write("Palabra final -> "+palabraFinal);
+    //Transformar(Desencriptar);
+    function CopiarTexto() {
+        var textoCopiado = document.getElementById("resultado");
+        if(textoCopiado.value=="¡Acá aparecerá el mensaje!"){
+            alert("¡Primero debes encriptar o desencriptar un mensaje! ;3")
         }else{
-            document.write("Error!: Palabra no admitida");
+            navigator.clipboard.writeText(textoCopiado.value);
+        }
+    }
+
+    function Transformar(funcion) {
+        var palabraInicial = document.getElementById("textoATransformar").value;
+        var palabraFinal = "";
+        if (ComprobarPalabra(palabraInicial)) {
+            palabraFinal = funcion(palabraInicial);
+            document.getElementById("resultado").innerHTML = palabraFinal;
+        } else {
+            alert("Debes ingresar una palabra válida");
         }
     }
     //#region Encriptar
-    function Encriptar(palabraInicial){
+    function Encriptar(palabraInicial) {
+        var palabraFinal = "";
         for (let i = 0; i < palabraInicial.length; i++) {
             var temp = palabraInicial[i];
             switch (temp) {
@@ -65,104 +110,96 @@
                 case undefined:
                 case null:
                     temp = "?";
-                }
+            }
             palabraFinal += temp;
         }
         return palabraFinal;
     }
-    
-    function ComprobarPalabra(palabraInicial){
-        if(isNaN(palabraInicial)){
-            if(palabraInicial!==null && palabraInicial!==undefined && palabraInicial!==""){
+
+    function ComprobarPalabra(palabraInicial) {
+        if (isNaN(palabraInicial)) {
+            if (palabraInicial !== null && palabraInicial !== undefined && palabraInicial !== "") {
                 return palabraInicial.toString().toLowerCase().split();
             }
         }
-        document.write("Trata de ingresar una palabra válida<br>");
         return false;
     }
     //#endregion Encriptar
     //#region Desencriptar
-    function Desencriptar(palabraInicial){
+    function Desencriptar(palabraInicial) {
         var palabraE = palabraInicial;
         for (let i = 0; i < palabraInicial.length; i++) {
             var a = Buscar(palabraE);
-            console.log("Mensaje-> "+a);
-            if(a!==undefined){
+            if (a !== undefined) {
                 palabraE = a;
-            }else{
+            } else {
                 break;
             }
         }
         return palabraE;
     }
     //Busca la secuencia de las palabras
-    function Buscar(palabra){
-        let i=0;
+    function Buscar(palabra) {
+        let i = 0;
         let letra;
         for (let i = 0; i < palabra.length; i++) {
-            console.log("empieza bucle");
             temp = palabra[i];
             switch (temp) {
                 case 'e':
-                    if(palabra[i+1] == 'n' &&
-                       palabra[i+2] == 't' &&
-                       palabra[i+3] == 'e' &&
-                       palabra[i+4] == 'r'){
-                        console.log("caso e");
-                        return RecortarPalabra(palabra,i,'e'); //La palabra dada la recortar
+                    if (palabra[i + 1] == 'n' &&
+                        palabra[i + 2] == 't' &&
+                        palabra[i + 3] == 'e' &&
+                        palabra[i + 4] == 'r') {
+                        return RecortarPalabra(palabra, i, 'e'); //La palabra dada la recortar
                     }
                     break;
                 case 'i':
-                    if(palabra[i+1] == 'm' &&
-                       palabra[i+2] == 'e' &&
-                       palabra[i+3] == 's'){
-                        console.log("caso i");
-                        return RecortarPalabra(palabra,i,'i');
-                       }
+                    if (palabra[i + 1] == 'm' &&
+                        palabra[i + 2] == 'e' &&
+                        palabra[i + 3] == 's') {
+                        return RecortarPalabra(palabra, i, 'i');
+                    }
                     break;
                 case 'a':
-                    if(palabra[i+1] == 'i'){
-                        console.log("caso a");
-                        return RecortarPalabra(palabra,i,'a');
+                    if (palabra[i + 1] == 'i') {
+                        return RecortarPalabra(palabra, i, 'a');
                     }
                     break;
                 case 'o':
-                    if(palabra[i+1] == 'b' &&
-                       palabra[i+2] == 'e' &&
-                       palabra[i+3] == 'r'){
-                        console.log("caso o");
-                        return RecortarPalabra(palabra,i,'o');
-                       }
+                    if (palabra[i + 1] == 'b' &&
+                        palabra[i + 2] == 'e' &&
+                        palabra[i + 3] == 'r') {
+                        return RecortarPalabra(palabra, i, 'o');
+                    }
                     break;
                 case 'u':
-                    if(palabra[i+1] == 'f' &&
-                       palabra[i+2] == 'a' &&
-                       palabra[i+3] == 't'){
-                        console.log("caso u");
-                        return RecortarPalabra(palabra,i,'u');
-                       }
+                    if (palabra[i + 1] == 'f' &&
+                        palabra[i + 2] == 'a' &&
+                        palabra[i + 3] == 't') {
+                        return RecortarPalabra(palabra, i, 'u');
+                    }
                     break;
             }
         }
     }
 
-    function RecortarPalabra(palabraInicial,indice,letra){
-        let n=0;
+    function RecortarPalabra(palabraInicial, indice, letra) {
+        let n = 0;
         switch (letra) {
             case 'e':
-                n=4;
+                n = 4;
                 break;
             case 'a':
-                n=1;
+                n = 1;
                 break;
             case 'i':
             case 'o':
             case 'u':
-                n=3;
+                n = 3;
                 break;
         }
-        return palabraInicial.slice(0,indice) + letra + 
-               palabraInicial.slice(indice+n+1,palabraInicial.length);
+        return palabraInicial.slice(0, indice) + letra +
+            palabraInicial.slice(indice + n + 1, palabraInicial.length);
     }
     //#endregion Desencriptar
 </script>
