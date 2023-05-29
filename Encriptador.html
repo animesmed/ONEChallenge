@@ -12,7 +12,7 @@
     </body>
 </html>
 <script>
-    var palabraInicial = "0213";
+    var palabraInicial = "a e i o u";
     var palabraFinal = "";
     /*Reglas
     La letra "e" es convertida para "enter"
@@ -22,17 +22,18 @@
     La letra "u" es convertida para "ufat"
     */
     
-    Encriptar();
-    //#region Encriptar
-    function Encriptar(){
+    Transformar(Encriptar);
+    
+    function Transformar(funcion){
         if(ComprobarPalabra(palabraInicial)){
-            palabraFinal=EncriptarPalabra(palabraInicial);
+            palabraFinal=funcion(palabraInicial);
             document.writeln("Palabra final -> "+palabraFinal);
         }else{
             document.writeln("Error!: Palabra no admitida");
         }
     }
-    function EncriptarPalabra(palabraInicial){
+    //#region Encriptar
+    function Encriptar(palabraInicial){
         for (let i = 0; i < palabraInicial.length; i++) {
             var temp = palabraInicial[i];
             switch (temp) {
@@ -80,5 +81,7 @@
         return false;
     }
     //#endregion Encriptar
+    //#region Desencriptar
     
+    //#endregion Desencriptar
 </script>
