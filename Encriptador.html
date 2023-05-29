@@ -23,7 +23,7 @@
     */
     
     Transformar(Encriptar);
-    
+
     function Transformar(funcion){
         if(ComprobarPalabra(palabraInicial)){
             palabraFinal=funcion(palabraInicial);
@@ -64,7 +64,7 @@
                     break;
                 case undefined:
                 case null:
-                    return ".error";
+                    temp = "?";
                 }
             palabraFinal += temp;
         }
