@@ -16,10 +16,13 @@
 <body>
     <header>
         <!--Imagen-->
-        <canvas width=1000 height=50 id="cinta"></canvas>
+        <div id="cintaContenedor">
+            <canvas width=900 height=50 id="cinta"></canvas>
+        </div>
+
         <h1><a href="https://www.aluracursos.com/">
-            <img src="Recursos/Logo.png" class="logo">
-        </a></h1>
+                <img src="Recursos/Logo.png" class="logo">
+            </a></h1>
 
         <!--Titulo-->
         <h2 id="titulo" onmouseover="CambiarTexto()" onmouseout="RestaurarTexto()">¡Encripta tu mensaje!</h2>
@@ -27,23 +30,28 @@
     <main>
         <!--Instrucciones-->
         <div class="Input">
-            <p>&#128712; Solo letras minúsculas y sin acentos</p>
-            <!--Lugar para escribir-->
-            <input type="text" id="textoATransformar" class="input" required placeholder="Ingresa el texto aquí...">
-            <div class="botones">
-                <!--Botones-->
-                <input type="submit" value="Encriptar" class="enviar" onclick="Transformar(Encriptar)">
-                <p class="espacio"></p>
-                <input type="submit" value="Desencriptar" class="enviar" onclick="Transformar(Desencriptar)">
+            <div class="Entrada">
+                <p>&#128712; Solo letras minúsculas y sin acentos</p>
+                <!--Lugar para escribir-->
+                <input type="text" id="textoATransformar" class="input" required placeholder="Ingresa el texto aquí...">
+                <div class="botones">
+                    <!--Botones-->
+                    <input type="submit" value="Encriptar" class="enviar" onclick="Transformar(Encriptar)">
+                    <p class="espacio"></p>
+                    <input type="submit" value="Desencriptar" class="enviar" onclick="Transformar(Desencriptar)">
+                </div>
             </div>
-            <!--Lugar donde aparecerá el mensaje-->
-            <div class="resultado">
-                <output name="resultado" id="resultado">¡Acá aparecerá el mensaje!</output>
+            <div class="Salida">
+                <!--Lugar donde aparecerá el mensaje-->
+                <div class="resultado">
+                    <output name="resultado" id="resultado">¡Acá aparecerá el mensaje!</output>
+                </div>
+                <!--Boton para copiar-->
+                <div class="copiar">
+                    <input type="submit" value="Copiar" class="botonCopiar" onclick="CopiarTexto()">
+                </div>
             </div>
-            <!--Boton para copiar-->
-            <div class="copiar">
-                <input type="submit" value="Copiar" class="botonCopiar" onclick="CopiarTexto()">
-            </div>
+
         </div>
 
     </main>
@@ -51,7 +59,9 @@
         <!--Acerca de-->
         <div class="footer">
             <canvas width=500 height=110 id="footer"></canvas>
-            <p>Acerca de:<br><br>Proyecto realizado por Annie M. Estacio<br>para el ONE Challenge</p>
+            <a href="https://https://github.com/Amilcar2727/ONE-Challenge/">
+                <p>Acerca de:<br><br>Proyecto realizado por Annie M. Estacio<br>para el ONE Challenge</p>
+            </a>
         </div>
     </footer>
 </body>
@@ -70,7 +80,7 @@
     var cinta = document.getElementById("cinta");
     var pincel = cinta.getContext("2d");
     pincel.fillStyle = "red";
-    pincel.fillRect(0, 0, 1000, 50);
+    pincel.fillRect(0, 0, 900, 50);
 
     /*Resto*/
     function CambiarTexto() {
@@ -94,6 +104,7 @@
     }
 
     function Transformar(funcion) {
+        document.querySelector('.copiar input[type="submit"]').value = "Copiar";
         var palabraInicial = document.getElementById("textoATransformar").value;
         var palabraFinal = "";
         if (ComprobarPalabra(palabraInicial)) {

@@ -23,15 +23,16 @@ body {
     cursor: pointer;
 }
 .logo:hover{
-
-    transform: rotate(5deg);
+    transform: rotate(6deg);
 }
-header canvas{
-    display: inline;
+#cinta{
+    display: block;
     position: absolute;
-    text-align: left;
-    top: 9%;
-    right: 10%;
+    text-align: center;
+    right: auto;
+    left: 50%;
+    top: 14%;
+    transform: translate(-50%, -50%);
 }
 
 h2 {
@@ -88,7 +89,7 @@ h2 {
 
 .resultado {
     text-align: left;
-    margin-right: 17%;
+    margin-right: 15.5%;
     background-color: white;
     height: auto;
     padding: 2.5%;
@@ -154,4 +155,40 @@ footer p {
     font-weight: bolder;
     /* Tamaño de fuente del texto */
     transition: 500ms;
+}
+@media screen and (max-width:1000px){ /*Si encuentra pagina menor igual a 800px*/
+    #cinta{
+        top: 30%;
+    }
+    header{
+        margin-bottom: 10%;
+    }
+    body{
+        padding-top: 25%;
+        margin-top: 10%;
+        scale: 1.6;
+
+    }
+    main{
+        margin-top: 7%;
+        scale: 1.1;
+        font-size: 1.4em;
+    }
+    .Entrada{
+        margin-bottom: 5%;
+    }
+    .enviar{
+        font-size: 0.9em;
+        margin-top: 5px;
+    }
+    .copiar input{
+        font-size: 1.4em;
+    }
+    footer{
+        margin-top: 20%;
+        bottom: 0;
+        text-align: bottom;
+        font-size: 1.2em;
+        scale: 1.3;
+    }
 }
