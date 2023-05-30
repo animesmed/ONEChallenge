@@ -8,26 +8,33 @@
     <link rel="stylesheet"
         href="C:/Users/YONI/Desktop/ProgCourse/DesarrolloWeb/1742-HTML5-y-CSS3-parte2-master/reset.css">
     <link rel="stylesheet" href="C:/Users/YONI/Desktop/ONEChallenge/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <!--Imagen-->
-        <h1><img src="Recursos/Logo.png" class="logo"></h1>
+        <canvas width=1000 height=50 id="cinta"></canvas>
+        <h1><a href="https://www.aluracursos.com/">
+            <img src="Recursos/Logo.png" class="logo">
+        </a></h1>
+
         <!--Titulo-->
-        <h2>¡Encripta tu mensaje!</h2>
+        <h2 id="titulo" onmouseover="CambiarTexto()" onmouseout="RestaurarTexto()">¡Encripta tu mensaje!</h2>
     </header>
     <main>
         <!--Instrucciones-->
         <div class="Input">
             <p>&#128712; Solo letras minúsculas y sin acentos</p>
             <!--Lugar para escribir-->
-            <input type="text" id="textoATransformar" class="input" required placeholder="Ingresa el texto aquí">
+            <input type="text" id="textoATransformar" class="input" required placeholder="Ingresa el texto aquí...">
             <div class="botones">
                 <!--Botones-->
-                <input type="submit" value="Encripta" class="enviar" onclick="Transformar(Encriptar)">
+                <input type="submit" value="Encriptar" class="enviar" onclick="Transformar(Encriptar)">
                 <p class="espacio"></p>
-                <input type="submit" value="Desencripta" class="enviar" onclick="Transformar(Desencriptar)">
+                <input type="submit" value="Desencriptar" class="enviar" onclick="Transformar(Desencriptar)">
             </div>
             <!--Lugar donde aparecerá el mensaje-->
             <div class="resultado">
@@ -35,33 +42,53 @@
             </div>
             <!--Boton para copiar-->
             <div class="copiar">
-                <input type="submit" value="Copiar" onclick="CopiarTexto()">
+                <input type="submit" value="Copiar" class="botonCopiar" onclick="CopiarTexto()">
             </div>
         </div>
 
     </main>
     <footer>
         <!--Acerca de-->
-        <p>Acerca de:<br><br>Proyecto realizado por Annie M. Estacio Medrano para el ONE Challenge</p>
+        <div class="footer">
+            <canvas width=500 height=110 id="footer"></canvas>
+            <p>Acerca de:<br><br>Proyecto realizado por Annie M. Estacio<br>para el ONE Challenge</p>
+        </div>
     </footer>
 </body>
 
 </html>
+
 <script>
-    //var pantalla = document.querySelector("html");
-    /*Reglas
-    La letra "e" es convertida para "enter"
-    La letra "i" es convertida para "imes"
-    La letra "a" es convertida para "ai"
-    La letra "o" es convertida para "ober"
-    La letra "u" es convertida para "ufat"
-    */
-    //Transformar(Desencriptar);
+    /*Canvas*/
+    var footer = document.getElementById("footer");
+    var pincel = footer.getContext("2d");
+    pincel.fillStyle = "orange";
+    pincel.beginPath();
+    pincel.arc(250, 200, 200, 0, 2 * 3.14);
+    pincel.fill();
+
+    var cinta = document.getElementById("cinta");
+    var pincel = cinta.getContext("2d");
+    pincel.fillStyle = "red";
+    pincel.fillRect(0, 0, 1000, 50);
+
+    /*Resto*/
+    function CambiarTexto() {
+        var elemento = document.getElementById("titulo");
+        elemento.textContent = "¡3ncr1pt4 tv m3ns4j3!";
+    }
+
+    function RestaurarTexto() {
+        var elemento = document.getElementById("titulo");
+        elemento.textContent = "¡Encripta tu mensaje!";
+    }
+
     function CopiarTexto() {
         var textoCopiado = document.getElementById("resultado");
-        if(textoCopiado.value=="¡Acá aparecerá el mensaje!"){
+        if (textoCopiado.value == "¡Acá aparecerá el mensaje!") {
             alert("¡Primero debes encriptar o desencriptar un mensaje! ;3")
-        }else{
+        } else {
+            document.querySelector('.copiar input[type="submit"]').value = "¡Texto Copiado!";
             navigator.clipboard.writeText(textoCopiado.value);
         }
     }
@@ -73,7 +100,7 @@
             palabraFinal = funcion(palabraInicial);
             document.getElementById("resultado").innerHTML = palabraFinal;
         } else {
-            alert("Debes ingresar una palabra válida");
+            alert("¡Debes ingresar una palabra válida!");
         }
     }
     //#region Encriptar
